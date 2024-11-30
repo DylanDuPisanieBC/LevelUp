@@ -1,0 +1,32 @@
+:root {
+  --black: #080808;
+  --white: #E3F0D3;
+  --red: #ED2224;
+  --blue: #31ADE3;
+  --green: #71C389;
+  --orange: #F1A51F;
+}
+
+.orbitron-regular {
+  font-family: "Orbitron", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.orbitron-bold {
+  font-family: "Orbitron", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 800;
+  font-style: normal;
+}
+
+.micro-5 {
+  font-family: "Micro 5", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+body {
+  background-color: var(--black);
+}
