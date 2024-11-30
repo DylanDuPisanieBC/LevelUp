@@ -1,9 +1,59 @@
 import React from "react";
 import Navbar from "../components/navbar";
+import GradRow from "../components/gradrow";
+import { useEffect, useState } from "react";
 
 import '../App.css';
 
 const ViewAllGraduates = () => {
+
+    const apiURL = 'http://localhost:5082/api/graduates/'
+
+    const[loading, setLoading] = useState(false);
+    const[graduates, setGraduates] = useState([]);
+
+    useEffect(() => {
+        const fetchGraduatesData = async () => {
+
+          setLoading(true); 
+
+          const result = await LoadGraduatesData();
+
+          if (result) 
+          {
+            setGraduates(result); 
+            console.log(result);
+          }
+
+          setLoading(false); 
+        };
+    
+        fetchGraduatesData();
+      }, []);
+
+    async function LoadGraduatesData(){
+
+        const apiEndpoint = apiURL + 'get';
+        try
+        {
+            const result = await fetch(apiEndpoint);
+            if(result.ok)
+            {
+                return await result.json();
+            }else
+            {
+                console.log("something went wrong");
+                return null;
+            }
+
+        }catch(err)
+        {
+            console.log(err.message);
+            return null;
+        }
+        
+    }
+
     return (
         <div>
             <Navbar />
@@ -30,13 +80,11 @@ const ViewAllGraduates = () => {
                         </tr>
                     </thead>
                     <tbody className="text-white">
-                        {/* Sample row 
-                            <tr>
-                                <td className="md:py-4 py-2 md:px-8 px-4">Full Name</td>
-                                <td className="md:py-4 py-2 md:px-8 px-4 md:block hidden">Contact Details</td>
-                                <td className="md:py-4 py-2 md:px-8 px-4">Actions</td>
-                            </tr>
-                        */}
+                        {
+                            graduates.map(grad => {
+                                return <GradRow graduate={grad}></GradRow>
+                            })
+                        }
                     </tbody>
                 </table>
             </section>

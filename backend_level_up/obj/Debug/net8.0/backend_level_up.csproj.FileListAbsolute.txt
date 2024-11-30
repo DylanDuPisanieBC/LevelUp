@@ -168,3 +168,4 @@ F:\Work\_LevelUpAssessment\backend_level_up\obj\Debug\net8.0\refint\backend_leve
 F:\Work\_LevelUpAssessment\backend_level_up\obj\Debug\net8.0\backend_level_up.pdb
 F:\Work\_LevelUpAssessment\backend_level_up\obj\Debug\net8.0\backend_level_up.genruntimeconfig.cache
 F:\Work\_LevelUpAssessment\backend_level_up\obj\Debug\net8.0\ref\backend_level_up.dll
+F:\Work\_LevelUpAssessment\backend_level_up\obj\Debug\net8.0\backend_level_up.sourcelink.json

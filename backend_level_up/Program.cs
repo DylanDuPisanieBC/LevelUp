@@ -5,7 +5,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-
 if(builder.Environment.IsDevelopment()){
 
     // setup swagger - for testing purposes
@@ -50,9 +49,8 @@ if (app.Environment.IsDevelopment())
     dbPop.PopulateDatabase();   
 }
 
+app.UseCors();
 app.MapControllers();
-app.UseHttpsRedirection();
-
 app.Run();
 
 
