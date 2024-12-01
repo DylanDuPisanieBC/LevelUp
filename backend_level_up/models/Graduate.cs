@@ -18,12 +18,10 @@ namespace backend_level_up.models
         public string LastName {get; set;} = string.Empty;
 
         [StringLength(100)]
-        [EmailAddress]
         public string? EmailAddress {get; set;} = string.Empty;
 
         [StringLength(100)]
-        [Phone]
-        public string? PhoneNumber {get; set;} = string.Empty;
+        public string? PhoneNumber { get; set; } = string.Empty;
 
         [Required]
         [Dob]

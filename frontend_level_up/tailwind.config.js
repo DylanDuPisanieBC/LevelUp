@@ -15,7 +15,11 @@ module.exports = {
       orbitronBold: ["Orbitron Bold", "sans-serif"],
       micro5: ["Micro 5", "sans-serif"]
     },
-    extend: {},
+    extend: {
+      colors: {
+        autofill: '#F1A51F'
+      },
+    },
   },
   plugins: [],
 }
