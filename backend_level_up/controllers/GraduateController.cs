@@ -4,6 +4,7 @@ using backend_level_up.models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.IdentityModel.Tokens;
 
 namespace backend_level_up.controllers
 {
@@ -112,12 +113,24 @@ namespace backend_level_up.controllers
 
                 if(gradToEdit == null)
                 {
-                    return BadRequest("Graduate not found");
+                    return BadRequest("Graduate to edit data is null");
                 }
 
                 if(!ModelState.IsValid)
                 {
-                    return BadRequest(ModelState);
+                    return BadRequest("Model is not valid");
+                }
+
+                if(!String.IsNullOrEmpty(editedInfo.PhoneNumber)){
+                    if(editedInfo?.PhoneNumber[0] != "+".ToCharArray()[0]){
+                        return BadRequest("Phone Number is not valid");
+                    }
+                }
+
+                if(!String.IsNullOrEmpty(editedInfo.EmailAddress)){
+                    if(!editedInfo.EmailAddress.Contains("@".ToCharArray()[0]) || !editedInfo.EmailAddress.Contains(".".ToCharArray()[0])){
+                        return BadRequest("Email Address is not valid");
+                    }
                 }
 
                 gradToEdit.FirstName = editedInfo.FirstName;
