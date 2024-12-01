@@ -14,7 +14,7 @@ const CreateGraduate = () => {
 
     const[loading, setLoading] = useState(false);
     const [canClick, setCanClick] = useState(false);
-    const[addButtonEnabled, setAddButtonEnabled] = useState(true);
+    const[buttonEnabled, setButtonEnabled] = useState(true);
     const[popup, setPopup] = useState(false);
     const[popupMessage, setPopupMessage] = useState("Test")
     const[popupColor, setPopupColor] = useState("green")
@@ -72,12 +72,13 @@ const CreateGraduate = () => {
     async function addNewGraduate(e) {
         e.preventDefault();
         setLoading(true);
-    
+        setButtonEnabled(false)
         console.log(dataValidation);
 
         if (!dataValidation.valid) {
             console.log("data validation failed")
             setLoading(false);
+            setButtonEnabled(true);
             return;
         }
 
@@ -104,11 +105,13 @@ const CreateGraduate = () => {
                 setLoading(false);     
                 setPopupColor('orange');
                 setPopupMessage('Failed to add graduate');
-                setPopup(true);       
+                setPopup(true);      
+                setButtonEnabled(true);
                 return null;
             }
 
             setLoading(false);
+            setButtonEnabled(true);
 
         }catch(err)
         {
@@ -117,6 +120,7 @@ const CreateGraduate = () => {
             setPopupColor('red');
             setPopupMessage('Failed to add graduate:' + err.message);
             setPopup(true);
+            setButtonEnabled(true);
             return null;
         }
     
@@ -242,6 +246,7 @@ const CreateGraduate = () => {
                                 transition: { type: "spring", stiffness: 400, damping: 10, delay: 0 },
                             }}
                             whileTap={{ scale: 0.95 }}
+                            disabled={!buttonEnabled}
                             onClick={(e)=>{addNewGraduate(e)}}>
                             Add new Graduate
                             <img src="/assets/icons/rocket_white.webp" className=" w-[3vw] ml-3" />

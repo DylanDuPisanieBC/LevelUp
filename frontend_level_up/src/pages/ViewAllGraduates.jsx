@@ -23,6 +23,7 @@ const ViewAllGraduates = () => {
     const[currentGraduate, setCurrentGraduate] = useState(null);
     const[deleteModal, setDeleteModal] = useState(false);
 
+
     const slideInRightVariants = {
         hidden: { scaleX: 0, opacity: 0 },
         visible: { scaleX: 1, opacity: 1 }, 

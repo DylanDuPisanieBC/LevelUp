@@ -16,6 +16,7 @@ const UpdateGraduate = () => {
 
     const[loading, setLoading] = useState(false);
     const[canClick, setCanClick] = useState(false);
+    const[buttonEnabled, setButtonEnabled] = useState(true);
     const[popup, setPopup] = useState(false);
     const[popupMessage, setPopupMessage] = useState("Test")
     const[popupColor, setPopupColor] = useState("green")
@@ -123,7 +124,7 @@ const UpdateGraduate = () => {
         e.preventDefault();
         setLoading(true);
         console.log(dataValidation);
-
+        setButtonEnabled(false);
         if (!dataValidation.valid) {
             console.log("data validation failed")
             setLoading(false);
@@ -148,6 +149,7 @@ const UpdateGraduate = () => {
                 setPopupMessage('Graduate updated successfully');
                 setPopup(true);
                 setLoading(false);
+                setButtonEnabled(true);
 
             }else
             {
@@ -156,6 +158,7 @@ const UpdateGraduate = () => {
                 setPopupColor('orange');
                 setPopupMessage('Failed to update graduate');
                 setPopup(true);
+                setButtonEnabled(true);
                 return null;
             }
 
@@ -166,6 +169,7 @@ const UpdateGraduate = () => {
             setPopupColor('red');
             setPopupMessage('Failed to update graduate' + err.message);
             setPopup(true);
+            setButtonEnabled(true);
             return null;
         }
     
@@ -290,7 +294,8 @@ const UpdateGraduate = () => {
                                 transition: { type: "spring", stiffness: 400, damping: 10, delay: 0 },
                             }}
                             whileTap={{ scale: 0.95 }}
-                            onClick={(e)=>{ editGraduate(e);}}>
+                            onClick={(e)=>{ editGraduate(e);}}
+                            disabled={!buttonEnabled}>
                             Update Graduate
                             <img src="/assets/icons/rocket_white.webp" className=" w-[3vw] ml-3" />
                         </motion.button>
