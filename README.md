@@ -1,9 +1,11 @@
 # Level Up Assessment
 
+Project completed for the Level Up assessment!🚀
+
 ## Starting Project
 
 > [!WARNING]
-> The backend builds the in memory database while in development mode, changing the development mode to production will cause errors.
+> While in development mode, the backend uses a EF Core in-memory database. Switching to production mode without further configuration the DbContext to connect to a SQLserver will cause errors.
 
 ### Starting Backend
 ```
@@ -26,3 +28,4 @@ You can test the API directly by using the command ```dotnet watch run```, this 
 ### Frontend
 
 The frontend is built using ReactJS, animations were created using the framer-motion library.
+
