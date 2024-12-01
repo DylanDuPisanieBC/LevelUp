@@ -17,17 +17,17 @@ export default function Popup({message, color, setPopupState}){
         visible: { opacity: 1}
     };
 
-    const colorToUse = color === 'red' ? "relative w-[70vw] h-[50vw] p-10 md:w-[25vw] md:h-[10vw] bg-red flex flex-col justify-center items-center text-center rounded-[2vw] shadow-sm"
+    const colorToUse = color === 'red' ? "relative w-[70vw] h-[50vw] p-10 md:w-[25vw] md:h-[10vw] bg-red flex flex-col justify-center items-center text-center rounded-[2vw] drop-shadow-xl [text-shadow:_0px_5px_5px_rgb(0_0_0_/_30%)]"
     : 
-    color === 'green' ? "relative w-[70vw] h-[50vw] p-10 md:w-[25vw] md:h-[10vw] bg-green flex flex-col justify-center items-center text-center rounded-[2vw] shadow-sm"
+    color === 'green' ? "relative w-[70vw] h-[50vw] p-10 md:w-[25vw] md:h-[10vw] bg-green flex flex-col justify-center items-center text-center rounded-[2vw] drop-shadow-xl [text-shadow:_0px_5px_5px_rgb(0_0_0_/_30%)]"
     :
-    "relative w-[70vw] h-[50vw] p-10 md:w-[25vw] md:h-[10vw] bg-orange flex flex-col justify-center items-center text-center rounded-[2vw] shadow-sm"
+    "relative w-[70vw] h-[50vw] p-10 md:w-[25vw] md:h-[10vw] bg-orange flex flex-col justify-center items-center text-center rounded-[2vw] drop-shadow-xl [text-shadow:_0px_5px_5px_rgb(0_0_0_/_30%)]"
 
-    const timerTime = color === 'red' ? 3000
+    const timerTime = color === 'red' ? 2000
     : 
-    color === 'green' ? 1500
+    color === 'green' ? 2000
     :
-    2500
+    2000
     
     return (
 
