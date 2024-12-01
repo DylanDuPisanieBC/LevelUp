@@ -18,7 +18,7 @@ export default function GradActionButton({graduate, buttonType, showDeleteModal,
             className={styleUsed}
             initial={{ background: "transparent" }}
             whileHover={{
-                scale: 1.1, // Springy scaling
+                scale: 1.1,
                 transition: { duration: 0.3, type: "spring", stiffness: 400, damping: 17 },
             }}
             whileTap={{ scale: 0.95 }}

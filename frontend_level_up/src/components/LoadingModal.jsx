@@ -16,9 +16,9 @@ export default function LoadingModal(){
         animate="visible"
         transition={{duration:0.2, ease: "easeOut"}}
         >
-            <div className="relative w-[25vw] h-[25vw] bg-transparent flex flex-col justify-center items-center">
+            <div className="relative w-[70vw] h-[70vw] md:w-[25vw] md:h-[25vw] bg-transparent flex flex-col justify-center items-center">
                 <div class="loader"></div>
-                <h1 className="text-white text-2xl font-light mt-10">Loading you data...</h1>
+                <h1 className="text-white text-2xl font-light mt-10">Loading your data...</h1>
             </div>
         </motion.div>
 

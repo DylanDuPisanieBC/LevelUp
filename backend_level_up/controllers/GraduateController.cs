@@ -22,14 +22,14 @@ namespace backend_level_up.controllers
                 List<Graduate> graduates = await _dbContext.Graduates.Where(grad => grad.IsDeleted == false).ToListAsync();
                 if(graduates == null)
                 {                    
-                    return NotFound("No Data.");
+                    return NotFound(new { Message = "No Data."});
                 }
 
                 return Ok(graduates);
             }catch(Exception error)
             {
                 Console.WriteLine(error.ToString());
-                return StatusCode(500, "Something went wrong on the server");
+                return StatusCode(500, new { Message = "Something went wrong on the server"});
             }
         }
 
@@ -42,13 +42,13 @@ namespace backend_level_up.controllers
                 Graduate? graduate = await _dbContext.Graduates.FirstOrDefaultAsync(grad => grad.GraduateId == id);
                 if(graduate == null)
                 {
-                    return NotFound("Graduate not found.");
+                    return NotFound(new { Message = "Graduate not found."});
                 }
                 return Ok(graduate);               
             }catch(Exception error)
             {
                 Console.WriteLine(error.ToString());
-                return StatusCode(500, "Something went wrong on the server");
+                return StatusCode(500, new { Message = "Something went wrong on the server"});
             }
         }
 
@@ -61,18 +61,18 @@ namespace backend_level_up.controllers
                 Graduate? graduate = await _dbContext.Graduates.FirstOrDefaultAsync(grad => grad.GraduateId == id);
                 if(graduate == null)
                 {
-                    return NotFound("Graduate not found.");
+                    return NotFound(new { Message = "Graduate not found."});
                 }
 
                 graduate.IsDeleted = true;
 
                 await _dbContext.SaveChangesAsync();
 
-                return Ok("Graduate deleted successfully");                
+                return Ok(new { Message = "Graduate deleted successfully"});                
             }catch(Exception error)
             {
                 Console.WriteLine(error.ToString());
-                return StatusCode(500, "Something went wrong on the server");
+                return StatusCode(500, new { Message = "Something went wrong on the server"});
             }
         }
 
@@ -88,6 +88,12 @@ namespace backend_level_up.controllers
                     return BadRequest(ModelState);
                 }
 
+                Graduate? duplicateGraduate = await _dbContext.Graduates.FirstOrDefaultAsync(grad => grad.EmailAddress == gradToAdd.EmailAddress);
+
+                if(duplicateGraduate != null){
+                    return  BadRequest(new { Message = "Email address already in use!"});
+                }
+
                 gradToAdd.GraduateId = Guid.NewGuid();
                 gradToAdd.DateCreated = DateTime.Now;
                 gradToAdd.IsDeleted = false;
@@ -95,11 +101,11 @@ namespace backend_level_up.controllers
                 await _dbContext.Graduates.AddAsync(gradToAdd);
                 await _dbContext.SaveChangesAsync();
 
-                return Ok("Graduate added successfully.");
+                return Ok(new { Message = "Graduate added successfully."});
             }catch(Exception error)
             {
                 Console.WriteLine(error.ToString());
-                return StatusCode(500, "Something went wrong on the server");
+                return StatusCode(500, new { Message = "Something went wrong on the server"});
             }
         }
 
@@ -109,27 +115,38 @@ namespace backend_level_up.controllers
         {
             try
             {  
+
                 Graduate? gradToEdit = await _dbContext.Graduates.FirstOrDefaultAsync(grad => grad.GraduateId == editedInfo.GraduateId);
 
                 if(gradToEdit == null)
                 {
-                    return BadRequest("Graduate to edit data is null");
+                    return BadRequest(new { Message = "Graduate to edit data is null"});
                 }
 
                 if(!ModelState.IsValid)
                 {
-                    return BadRequest("Model is not valid");
+                    return BadRequest(new { Message = "Model is not valid"});
+                }
+                List<Graduate> duplicateGraduates = new List<Graduate>();
+                duplicateGraduates = await _dbContext.Graduates.Where(grad => grad.EmailAddress == editedInfo.EmailAddress).ToListAsync();
+
+                if(duplicateGraduates.Count != 0){
+                    foreach(Graduate grad in duplicateGraduates){
+                        if(grad.EmailAddress == editedInfo.EmailAddress && grad.GraduateId != editedInfo.GraduateId){
+                            return BadRequest(new { Message = "Email address already in use!"});
+                        }
+                    }
                 }
 
                 if(!String.IsNullOrEmpty(editedInfo.PhoneNumber)){
                     if(editedInfo?.PhoneNumber[0] != "+".ToCharArray()[0]){
-                        return BadRequest("Phone Number is not valid");
+                        return BadRequest(new { Message = "Phone Number is not valid"});
                     }
                 }
 
                 if(!String.IsNullOrEmpty(editedInfo.EmailAddress)){
                     if(!editedInfo.EmailAddress.Contains("@".ToCharArray()[0]) || !editedInfo.EmailAddress.Contains(".".ToCharArray()[0])){
-                        return BadRequest("Email Address is not valid");
+                        return BadRequest(new { Message = "Email Address is not valid"});
                     }
                 }
 
@@ -146,7 +163,7 @@ namespace backend_level_up.controllers
             }catch(Exception error)
             {
                 Console.WriteLine(error.ToString());
-                return StatusCode(500, "Something went wrong on the server");
+                return StatusCode(500, new { Message = "Something went wrong on the server"});
             }
         }
 

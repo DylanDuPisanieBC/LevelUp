@@ -103,12 +103,21 @@ const CreateGraduate = () => {
 
             }else
             {
-                console.log("something went wrong");   
-                setLoading(false);     
-                setPopupColor('orange');
-                setPopupMessage('Failed to add graduate');
-                setPopup(true);      
+                console.log("something went wrong"); 
+                const json = await result.json();
+                setLoading(false);         
                 setButtonEnabled(true);
+                
+                if(json.message === 'Email address already in use!'){
+                    setPopupColor('orange');
+                    setPopupMessage('Email address already in use!');
+                    setPopup(true); 
+                }else{
+                    setPopupColor('orange');
+                    setPopupMessage('Failed to add graduate');
+                    setPopup(true); 
+                }
+                 
                 return null;
             }
 

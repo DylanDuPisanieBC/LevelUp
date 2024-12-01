@@ -155,11 +155,19 @@ const UpdateGraduate = () => {
 
             }else
             {
-                console.log(result.message);
+                const json = await result.json();
                 setLoading(false);
-                setPopupColor('orange');
-                setPopupMessage('Failed to update graduate');
-                setPopup(true);
+
+                if(json.message === 'Email address already in use!'){
+                    setPopupColor('orange');
+                    setPopupMessage('Email address already in use!');
+                    setPopup(true); 
+                }else{
+                    setPopupColor('orange');
+                    setPopupMessage('Failed to update graduate');
+                    setPopup(true); 
+                }
+
                 setButtonEnabled(true);
                 return null;
             }

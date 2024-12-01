@@ -5232,11 +5232,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "f:\\Work\\_LevelUpAssessment\\backend_level_up\\backend_level_up.csproj",
+      "projectUniqueName": "F:\\Work\\LevelUp\\backend_level_up\\backend_level_up.csproj",
       "projectName": "backend_level_up",
-      "projectPath": "f:\\Work\\_LevelUpAssessment\\backend_level_up\\backend_level_up.csproj",
+      "projectPath": "F:\\Work\\LevelUp\\backend_level_up\\backend_level_up.csproj",
       "packagesPath": "C:\\Users\\Dylan\\.nuget\\packages\\",
-      "outputPath": "f:\\Work\\_LevelUpAssessment\\backend_level_up\\obj\\",
+      "outputPath": "F:\\Work\\LevelUp\\backend_level_up\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
