@@ -5,7 +5,7 @@ Project completed for the Level Up assessment!🚀
 ## Starting Project
 
 > [!WARNING]
-> While in development mode, the backend uses a EF Core in-memory database. Switching to production mode without further configurationto the DbContext  for it to connect to a SQLserver will cause errors.
+> While in development mode, the backend uses a EF Core in-memory database. Switching to production mode without further configuration to the DbContext  for it to connect to a SQLserver will cause errors.
 
 ### Starting Backend
 ```
