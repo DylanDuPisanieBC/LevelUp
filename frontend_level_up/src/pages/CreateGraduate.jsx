@@ -19,6 +19,7 @@ const CreateGraduate = () => {
     const[popupMessage, setPopupMessage] = useState("Test")
     const[popupColor, setPopupColor] = useState("green")
     const[buttonClicked, setButtonClicked] = useState(false);
+    const[slideAnim, setSlideAnim] = useState(false);
 
     const[newGraduate, setNewGraduate] = useState({
         graduateId: null,
@@ -199,21 +200,21 @@ const CreateGraduate = () => {
             <Navbar />
             {loading ? <LoadingModal/> : <></>}
             {popup && <Popup  message={popupMessage} color={popupColor} setPopupState={setPopup}/>}
-            <div className="w-screen h-[20vh] flex justify-center items-center pl-14 grow">
+            <div className="w-screen h-[10vh] md:h-[20vh] flex justify-center items-center pl-5 md:pl-14 grow">
                 <div className="">
-                    <motion.h3 className="uppercase text-2xl text-white font-[400]" variants={slideInLeftVariants} initial="hidden" animate="visible" transition={{ duration: 0.4, ease: "easeOut", delay: 0.3 }}>Level Up 2024</motion.h3>
-                    <motion.h1 className="uppercase text-7xl text-white font-bold" variants={slideInLeftVariants} initial="hidden" animate="visible" transition={{ duration: 0.4, ease: "easeOut", delay: 0.5 }}>Create Graduate</motion.h1>
+                    <motion.h3 className="uppercase text-[3vw] md:text-2xl text-white font-[400]" variants={slideInLeftVariants} initial="hidden" animate="visible" transition={{ duration: 0.4, ease: "easeOut", delay: 0.3 }}>Level Up 2024</motion.h3>
+                    <motion.h1 className="uppercase text-2xl md:text-7xl text-white font-bold" variants={slideInLeftVariants} initial="hidden" animate="visible" transition={{ duration: 0.4, ease: "easeOut", delay: 0.5 }}>Create Graduate</motion.h1>
                 </div>
-                <div className="flex grow flex-col gap-1 h-[30%] pl-20 mt-10">
-                    <motion.div className="bg-blue grow" variants={slideInRightVariants} initial="hidden" animate="visible" transition={{ duration: 0.4, ease: "easeOut", delay: 1 }} />
-                    <motion.div className="bg-green grow" variants={slideInRightVariants} initial="hidden" animate="visible" transition={{ duration: 0.4, ease: "easeOut", delay: 1.1 }} />
-                    <motion.div className="bg-orange grow" variants={slideInRightVariants} initial="hidden" animate="visible" transition={{ duration: 0.4, ease: "easeOut", delay: 1.2 }} />
-                    <motion.div className="bg-red grow" variants={slideInRightVariants} initial="hidden" animate="visible" transition={{ duration: 0.4, ease: "easeOut", delay: 1.3 }} />
+                <div className="flex grow flex-col gap-0.5 md:gap-1 h-[30%] pl-5 md:pl-20 mt-5 md:mt-10">
+                    <motion.div className="bg-blue grow z-10 grow" variants={ slideInRightVariants} initial="hidden" animate="visible" onAnimationComplete={()=>setSlideAnim(true)} transition={slideAnim ? { duration: 0.3, ease: "easeOut", delay: 0 }:{ duration: 0.8, ease: "easeOut", delay: 0.3 }} whileHover={{ translateX: "200px"}} />
+                    <motion.div className="bg-green grow z-10 grow" variants={slideInRightVariants} initial="hidden" animate="visible" onAnimationComplete={()=>setSlideAnim(true)} transition={slideAnim ? { duration: 0.3, ease: "easeOut", delay: 0 }:{ duration: 0.8, ease: "easeOut", delay: 0.4 }} whileHover={{ translateX: "200px"}} />
+                    <motion.div className="bg-orange grow z-10 grow" variants={slideInRightVariants} initial="hidden" animate="visible" onAnimationComplete={()=>setSlideAnim(true)} transition={slideAnim ? { duration: 0.3, ease: "easeOut", delay: 0 }:{ duration: 0.8, ease: "easeOut", delay: 0.5 }} whileHover={{ translateX: "200px"}} />
+                    <motion.div className="bg-red grow z-10 grow" variants={slideInRightVariants} initial="hidden" animate="visible" onAnimationComplete={()=>setSlideAnim(true)} transition={slideAnim ? { duration: 0.3, ease: "easeOut", delay: 0 }:{ duration: 0.8, ease: "easeOut", delay: 0.6 }} whileHover={{ translateX: "200px"}} />
                 </div>
             </div>
 
             <section className="md:px-12 px-4 mt-6">
-                <form className="grid grid-cols-2 gap-x-40 gap-y-14">
+                <form className="flex flex-col md:grid md:grid-cols-2 gap-x-40 gap-y-6 md:gap-y-14">
                     <div className="flex flex-col">
                         <label htmlFor="Name" className="text-orange text-md">Name</label>
                         <input id="Name" name="firstName" type="Text" value={newGraduate.firstName} onChange={handleValueChange} className="bg-black border-b border-white border-1 caret-white text-white text-2xl mt-2 focus:outline-none"></input>
@@ -239,9 +240,9 @@ const CreateGraduate = () => {
                         <input id="DateOfBirth" name="dateOfBirth" type="date" value={newGraduate.dateOfBirth} onChange={handleValueChange}  className="bg-black border-b border-white border-1 caret-white text-white text-2xl mt-2 focus:outline-none"></input>
                         {buttonClicked ? dataValidation.dateOfBirth.message !== "" ?  <label htmlFor="Name" className="text-red text-md mt-3">{dataValidation.dateOfBirth.message}</label> : <></> : <></>}
                     </div>
-                    <div className="flex flex-col col-start-2 col-end-2 justify-center items-end">
+                    <div className="flex flex-col col-start-2 col-end-2 items-center md:items-end">
                         <motion.button 
-                            className="bg-red w-6/12 text-white p-1 rounded-full micro-5 text-[2vw] flex justify-center items-center pl-8 pr-8 uppercase"
+                            className="md:static bg-red w-10/12 md:w-[20vw] text-white p-1 rounded-full micro-5 text-[7vw] md:text-[2vw] flex justify-center items-center pr-1 md:pl-3 pr-3 md:pr-2 uppercase"
                             variants={FadeInVariants}
                             initial="hidden"
                             animate="visible"
@@ -255,7 +256,7 @@ const CreateGraduate = () => {
                             disabled={!buttonEnabled}
                             onClick={(e)=>{addNewGraduate(e); setButtonClicked(true);}}>
                             Add new Graduate
-                            <img src="/assets/icons/rocket_white.webp" className=" w-[3vw] ml-3" />
+                            <img src="/assets/icons/rocket_white.webp" className="w-[8vw] md:w-[3vw] ml-[12vw] md:ml-[2vw]" />
                         </motion.button>
                     </div>
                 </form>

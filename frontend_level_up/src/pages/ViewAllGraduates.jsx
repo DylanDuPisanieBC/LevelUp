@@ -5,7 +5,7 @@ import DeleteModal from "../components/DeleteModal";
 import LoadingModal from "../components/LoadingModal";
 import Popup from "../components/Popup";
 import { useEffect, useState } from "react";
-import { motion } from 'framer-motion'
+import { motion, transform } from 'framer-motion'
 
 import '../App.css';
 
@@ -22,7 +22,7 @@ const ViewAllGraduates = () => {
     const[graduates, setGraduates] = useState([]);
     const[currentGraduate, setCurrentGraduate] = useState(null);
     const[deleteModal, setDeleteModal] = useState(false);
-
+    const[slideAnim, setSlideAnim] = useState(false);
 
     const slideInRightVariants = {
         hidden: { scaleX: 0, opacity: 0 },
@@ -152,28 +152,35 @@ const ViewAllGraduates = () => {
             {popup && <Popup  message={popupMessage} color={popupColor} setPopupState={setPopup}/>}
             {deleteModal ? <DeleteModal graduate={currentGraduate} cancelModal={toggleShowModal} deleteGraduate={DeleteGraduate}/> : null}
             
-            <div className="w-screen h-[20vh] flex justify-center items-center pl-14 grow">
-                <div className="">
-                    <motion.h3 className="uppercase text-2xl text-white font-[400]" variants={slideInLeftVariants} initial="hidden" animate="visible" transition={{ duration: 0.4, ease: "easeOut", delay: 0.3 }}>Level Up 2024</motion.h3>
-                    <motion.h1 className="uppercase text-7xl text-white font-bold" variants={slideInLeftVariants} initial="hidden" animate="visible" transition={{ duration: 0.4, ease: "easeOut", delay: 0.5 }}>Graduate List</motion.h1>
+            <div className="w-screen h-[10vh] md:h-[20vh] flex justify-center items-center pl-5 md:pl-14 grow">
+                <div className="mt-5 md: mt-10">
+                    <motion.h3 className="uppercase text-[3vw] md:text-2xl text-white font-[400]" variants={slideInLeftVariants} initial="hidden" animate="visible" transition={{ duration: 0.4, ease: "easeOut", delay: 0.3 }}>Level Up 2024</motion.h3>
+                    <motion.h1 className="uppercase text-2xl md:text-7xl text-white font-bold" variants={slideInLeftVariants} initial="hidden" animate="visible" transition={{ duration: 0.4, ease: "easeOut", delay: 0.5 }}>Graduate List</motion.h1>
                 </div>
-                <div className="flex grow flex-col gap-1 h-[30%] pl-20 mt-10">
-                    <motion.div className="bg-blue grow z-10 grow" variants={slideInRightVariants} initial="hidden" animate="visible" transition={{ duration: 0.8, ease: "easeOut", delay: 1 }} />
-                    <motion.div className="bg-green grow z-10 grow" variants={slideInRightVariants} initial="hidden" animate="visible" transition={{ duration: 0.8, ease: "easeOut", delay: 1.1 }} />
-                    <motion.div className="bg-orange grow z-10 grow" variants={slideInRightVariants} initial="hidden" animate="visible" transition={{ duration: 0.8, ease: "easeOut", delay: 1.2 }} />
-                    <motion.div className="bg-red grow z-10 grow" variants={slideInRightVariants} initial="hidden" animate="visible" transition={{ duration: 0.8, ease: "easeOut", delay: 1.3 }} />
+                <div className="flex grow flex-col gap-0.5 md:gap-1 h-[35%] md:h-[30%] pl-5 md:pl-20 mt-10 md:mt-10">
+                    <motion.div className="bg-blue grow z-10 grow" variants={ slideInRightVariants} initial="hidden" animate="visible" onAnimationComplete={()=>setSlideAnim(true)} transition={slideAnim ? { duration: 0.3, ease: "easeOut", delay: 0 }:{ duration: 0.8, ease: "easeOut", delay: 0.3 }} whileHover={{ translateX: "200px"}} />
+                    <motion.div className="bg-green grow z-10 grow" variants={slideInRightVariants} initial="hidden" animate="visible" onAnimationComplete={()=>setSlideAnim(true)} transition={slideAnim ? { duration: 0.3, ease: "easeOut", delay: 0 }:{ duration: 0.8, ease: "easeOut", delay: 0.4 }} whileHover={{ translateX: "200px"}} />
+                    <motion.div className="bg-orange grow z-10 grow" variants={slideInRightVariants} initial="hidden" animate="visible" onAnimationComplete={()=>setSlideAnim(true)} transition={slideAnim ? { duration: 0.3, ease: "easeOut", delay: 0 }:{ duration: 0.8, ease: "easeOut", delay: 0.5 }} whileHover={{ translateX: "200px"}} />
+                    <motion.div className="bg-red grow z-10 grow" variants={slideInRightVariants} initial="hidden" animate="visible" onAnimationComplete={()=>setSlideAnim(true)} transition={slideAnim ? { duration: 0.3, ease: "easeOut", delay: 0 }:{ duration: 0.8, ease: "easeOut", delay: 0.6 }} whileHover={{ translateX: "200px"}} />
                 </div>
             </div>
 
 
-            <section className="md:px-12 px-4 mt-6">
-                <table className="w-full border border-white md:rounded-t-xl rounded-t-lg overflow-hidden">
-                    <thead className="bg-white uppercase micro-5 text-3xl">
+            <motion.section
+             className="md:mx-12 mx-4 mt-6 mb-4 border-[1px] border-white rounded-xl overflow-hidden"
+
+             variants={fadeInLeftVariants}
+             initial="hidden"
+             animate="visible"
+             transition={{duration: 1.5, ease: "easeOut", delay: 0.2}}
+             >
+                <table className="w-full">
+                    <thead className="bg-white uppercase micro-5 text-lg text-light md:text-bold md:text-3xl">
                         <tr>
-                            <th className="md:rounded-s-xl rounded-s-lg md:py-2 py-1 md:px-8 px-4">
+                            <th className="md:rounded-s-xl rounded-s-lg md:py-2 py-1 md:px-8 pl-4">
                                 <div className="relative flex justify-start items-center">
                                     Full Name
-                                    <img src="../assets/icons/rocket_black.webp" className="absolute right-0 h-2/3 md:block hidden" />
+                                    <img src="../assets/icons/rocket_black.webp" className="absolute right-0 h-2/3 block" />
                                 </div>
                             </th>
                             <th className="md:py-2 py-1 md:px-8 px-4 md:block hidden">
@@ -219,7 +226,7 @@ const ViewAllGraduates = () => {
                         }
                     </tbody>
                 </table>
-            </section>
+            </motion.section>
         </div>
     )
 }

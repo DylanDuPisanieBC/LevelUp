@@ -21,6 +21,7 @@ const UpdateGraduate = () => {
     const[popup, setPopup] = useState(false);
     const[popupMessage, setPopupMessage] = useState("Test")
     const[popupColor, setPopupColor] = useState("green")
+    const[slideAnim, setSlideAnim] = useState(false);
     const[graduate, setGraduate] = useState({
         graduateId: null,
         firstName: '',
@@ -247,49 +248,49 @@ const UpdateGraduate = () => {
             <Navbar />
             {loading ? <LoadingModal/> : <></>}
             {popup && <Popup  message={popupMessage} color={popupColor} setPopupState={setPopup}/>}
-            <div className="w-screen h-[20vh] flex justify-center items-center pl-14 grow">
+            <div className="w-screen h-[10vh] md:h-[20vh] flex justify-center items-center pl-5 md:pl-14 grow">
                 <div className="">
-                    <motion.h3 className="uppercase text-2xl text-white font-[400]" variants={slideInLeftVariants} initial="hidden" animate="visible" transition={{ duration: 0.4, ease: "easeOut", delay: 0.3 }}>Level Up 2024</motion.h3>
-                    <motion.h1 className="uppercase text-7xl text-white font-bold" variants={slideInLeftVariants} initial="hidden" animate="visible" transition={{ duration: 0.4, ease: "easeOut", delay: 0.5 }}>Update Graduate</motion.h1>
+                    <motion.h3 className="uppercase text-[3vw] md:text-2xl text-white font-[400]" variants={slideInLeftVariants} initial="hidden" animate="visible" transition={{ duration: 0.4, ease: "easeOut", delay: 0.3 }}>Level Up 2024</motion.h3>
+                    <motion.h1 className="uppercase text-2xl md:text-7xl text-white font-bold" variants={slideInLeftVariants} initial="hidden" animate="visible" transition={{ duration: 0.4, ease: "easeOut", delay: 0.5 }}>Update Graduate</motion.h1>
                 </div>
-                <div className="flex grow flex-col gap-1 h-[30%] pl-20 mt-10">
-                    <motion.div className="bg-blue grow" variants={slideInRightVariants} initial="hidden" animate="visible" transition={{ duration: 0.4, ease: "easeOut", delay: 1 }} />
-                    <motion.div className="bg-green grow" variants={slideInRightVariants} initial="hidden" animate="visible" transition={{ duration: 0.4, ease: "easeOut", delay: 1.1 }} />
-                    <motion.div className="bg-orange grow" variants={slideInRightVariants} initial="hidden" animate="visible" transition={{ duration: 0.4, ease: "easeOut", delay: 1.2 }} />
-                    <motion.div className="bg-red grow" variants={slideInRightVariants} initial="hidden" animate="visible" transition={{ duration: 0.4, ease: "easeOut", delay: 1.3 }} />
+                <div className="flex grow flex-col gap-0.5 md:gap-1 h-[30%] pl-5 md:pl-20 mt-5 md:mt-10">
+                    <motion.div className="bg-blue grow z-10 grow" variants={ slideInRightVariants} initial="hidden" animate="visible" onAnimationComplete={()=>setSlideAnim(true)} transition={slideAnim ? { duration: 0.3, ease: "easeOut", delay: 0 }:{ duration: 0.8, ease: "easeOut", delay: 0.3 }} whileHover={{ translateX: "200px"}} />
+                    <motion.div className="bg-green grow z-10 grow" variants={slideInRightVariants} initial="hidden" animate="visible" onAnimationComplete={()=>setSlideAnim(true)} transition={slideAnim ? { duration: 0.3, ease: "easeOut", delay: 0 }:{ duration: 0.8, ease: "easeOut", delay: 0.4 }} whileHover={{ translateX: "200px"}} />
+                    <motion.div className="bg-orange grow z-10 grow" variants={slideInRightVariants} initial="hidden" animate="visible" onAnimationComplete={()=>setSlideAnim(true)} transition={slideAnim ? { duration: 0.3, ease: "easeOut", delay: 0 }:{ duration: 0.8, ease: "easeOut", delay: 0.5 }} whileHover={{ translateX: "200px"}} />
+                    <motion.div className="bg-red grow z-10 grow" variants={slideInRightVariants} initial="hidden" animate="visible" onAnimationComplete={()=>setSlideAnim(true)} transition={slideAnim ? { duration: 0.3, ease: "easeOut", delay: 0 }:{ duration: 0.8, ease: "easeOut", delay: 0.6 }} whileHover={{ translateX: "200px"}} />
                 </div>
             </div>
 
             <section className="md:px-12 px-4 mt-6">
-                <form className="grid grid-cols-2 gap-x-40 gap-y-14">
+                <form className="flex flex-col md:grid md:grid-cols-2 gap-x-40 gap-y-6 md:gap-y-14">
                     <div className="flex flex-col">
                         <label htmlFor="Name" className="text-orange text-md">Name</label>
                         <input id="Name" name="firstName" type="Text" value={graduate && graduate.firstName} onChange={handleValueChange} className="bg-black border-b border-white border-1 caret-white text-white text-2xl mt-2 focus:outline-none"></input>
-                        {buttonClicked ? dataValidation.firstName.message !== "" ?  <label htmlFor="Name" className="text-red text-md mt-3">{dataValidation.firstName.message}</label> : <></> : <></>}
+                        {buttonClicked ? dataValidation.firstName.message !== "" ?  <label htmlFor="Name" className="text-red text-sm md:text mt-3">{dataValidation.firstName.message}</label> : <></> : <></>}
                     </div>
                     <div className="flex flex-col col-start-2 col-end-2">
                         <label htmlFor="Surname" className="text-orange text-md">Surname</label>
                         <input id="Surname" name="lastName" type="Text" value={graduate && graduate.lastName} onChange={handleValueChange}  className="bg-black border-b border-white border-1 caret-white text-white text-2xl mt-2 focus:outline-none"></input>
-                        {buttonClicked ? dataValidation.lastName.message !== "" ?  <label htmlFor="Name" className="text-red text-md mt-3">{dataValidation.lastName.message}</label> : <></> : <></>}
+                        {buttonClicked ? dataValidation.lastName.message !== "" ?  <label htmlFor="Name" className="text-red text-sm md:text mt-3">{dataValidation.lastName.message}</label> : <></> : <></>}
                     </div>
                     <div className="flex flex-col">
                         <label htmlFor="PhoneNumber" className="text-orange text-md">Phone Number</label>
                         <input id="PhoneNumber" name="phoneNumber" type="tel" value={graduate && graduate.phoneNumber} onChange={handleValueChange}  className="bg-black border-b border-white border-1 caret-white text-white text-2xl mt-2 focus:outline-none"></input>
-                        {buttonClicked ? dataValidation.phoneNumber.message !== "" ?  <label htmlFor="Name" className="text-red text-md mt-3">{dataValidation.phoneNumber.message}</label> : <></> : <></>}
+                        {buttonClicked ? dataValidation.phoneNumber.message !== "" ?  <label htmlFor="Name" className="text-red text-sm md:text mt-3">{dataValidation.phoneNumber.message}</label> : <></> : <></>}
                     </div>
                     <div className="flex flex-col col-start-2 col-end-2">
                         <label htmlFor="EmailAddress" className="text-orange text-md">Email Address</label>
                         <input id="EmailAddress" name="emailAddress" type="email" value={graduate && graduate.emailAddress} onChange={handleValueChange}  className="bg-black border-b border-white border-1 caret-white text-white text-2xl mt-2 focus:outline-none"></input>
-                        {buttonClicked ? dataValidation.emailAddress.message !== "" ?  <label htmlFor="Name" className="text-red text-md mt-3">{dataValidation.emailAddress.message}</label> : <></> : <></>}
+                        {buttonClicked ? dataValidation.emailAddress.message !== "" ?  <label htmlFor="Name" className="text-red text-sm md:text mt-3">{dataValidation.emailAddress.message}</label> : <></> : <></>}
                     </div>
                     <div className="flex flex-col">
                         <label htmlFor="DateOfBirth" className="text-orange text-md">Date Of Birth</label>
                         <input id="DateOfBirth" name="dateOfBirth" type="date" value={graduate && graduate.dateOfBirth} onChange={handleValueChange}  className="bg-black border-b border-white border-1 caret-white text-white text-2xl mt-2 focus:outline-none"></input>
-                        {buttonClicked ? dataValidation.dateOfBirth.message !== "" ?  <label htmlFor="Name" className="text-red text-md mt-3">{dataValidation.dateOfBirth.message}</label> : <></> : <></>}
+                        {buttonClicked ? dataValidation.dateOfBirth.message !== "" ?  <label htmlFor="Name" className="text-red text-sm md:text-md mt-3">{dataValidation.dateOfBirth.message}</label> : <></> : <></>}
                     </div>
                     <div className="flex flex-col col-start-2 col-end-2 justify-center items-end">
                         <motion.button 
-                            className="bg-red w-6/12 text-white p-1 rounded-full micro-5 text-[2vw] flex justify-center items-center pl-8 pr-8 uppercase"
+                            className=" md:static bg-red w-10/12 md:w-[20vw] text-white p-1 rounded-full micro-5 text-[7vw] md:text-[2vw] flex justify-center items-center pr-1 md:pl-3 pr-3 md:pr-2 uppercase"
                             variants={FadeInVariants}
                             initial="hidden"
                             animate="visible"
@@ -303,7 +304,7 @@ const UpdateGraduate = () => {
                             onClick={(e)=>{ editGraduate(e); setButtonClicked(true);}}
                             disabled={!buttonEnabled}>
                             Update Graduate
-                            <img src="/assets/icons/rocket_white.webp" className=" w-[3vw] ml-3" />
+                            <img src="/assets/icons/rocket_white.webp" className="w-[8vw] md:w-[3vw] ml-[12vw] md:ml-[2vw]" />
                         </motion.button>
                     </div>
                 </form>

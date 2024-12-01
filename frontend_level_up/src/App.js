@@ -76,7 +76,7 @@ function PageTransition({ children }) {
 function App() {
   return (
     <BrowserRouter>
-      <AnimatedRoutes />
+      <AnimatedRoutes/>
     </BrowserRouter>
   );
 }

@@ -17,11 +17,11 @@ export default function Popup({message, color, setPopupState}){
         visible: { opacity: 1}
     };
 
-    const colorToUse = color === 'red' ? "relative w-[25vw] h-[10vw] bg-red flex flex-col justify-center items-center text-center rounded-[2vw] shadow-sm"
+    const colorToUse = color === 'red' ? "relative w-[70vw] h-[50vw] p-10 md:w-[25vw] md:h-[10vw] bg-red flex flex-col justify-center items-center text-center rounded-[2vw] shadow-sm"
     : 
-    color === 'green' ? "relative w-[25vw] h-[10vw] bg-green flex flex-col justify-center items-center text-center rounded-[2vw] shadow-sm"
+    color === 'green' ? "relative w-[70vw] h-[50vw] p-10 md:w-[25vw] md:h-[10vw] bg-green flex flex-col justify-center items-center text-center rounded-[2vw] shadow-sm"
     :
-    "relative w-[25vw] h-[10vw] bg-orange flex flex-col justify-center items-center text-center rounded-[2vw] shadow-sm"
+    "relative w-[70vw] h-[50vw] p-10 md:w-[25vw] md:h-[10vw] bg-orange flex flex-col justify-center items-center text-center rounded-[2vw] shadow-sm"
 
     const timerTime = color === 'red' ? 3000
     : 
