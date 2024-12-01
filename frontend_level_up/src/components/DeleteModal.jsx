@@ -1,5 +1,6 @@
 import {motion} from 'framer-motion'
-import { useState } from 'react';
+import { useEffect } from 'react';
+import { disableScroll, enableScroll } from "../helperComponents/scrollLock";
 
 export default function DeleteModal({graduate, cancelModal, deleteGraduate}){
 
@@ -7,11 +8,19 @@ export default function DeleteModal({graduate, cancelModal, deleteGraduate}){
         hidden: { opacity: 0},
         visible: { opacity: 1}
     };
+
+    useEffect(() => {
+        disableScroll();
+
+        return () => {
+            enableScroll();
+        }
+    }, [])
     
     return (
 
         <motion.div 
-        className="w-screen h-screen bg-[#080808e1] absolute top-0 left-0 z-50 flex items-center justify-center"
+        className="w-screen h-screen bg-[#080808e1] fixed bottom-0 left-0 z-50 flex items-center justify-center"
         variants={FadeInVariants}
         initial="hidden"
         animate="visible"

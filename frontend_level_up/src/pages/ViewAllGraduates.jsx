@@ -5,7 +5,7 @@ import DeleteModal from "../components/DeleteModal";
 import LoadingModal from "../components/LoadingModal";
 import Popup from "../components/Popup";
 import { useEffect, useState } from "react";
-import { motion, transform } from 'framer-motion'
+import { motion } from 'framer-motion'
 
 import '../App.css';
 

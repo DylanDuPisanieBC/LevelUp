@@ -1,5 +1,6 @@
 import { useEffect} from 'react';
 import { motion } from 'framer-motion'
+import { disableScroll, enableScroll } from "../helperComponents/scrollLock";
 
 export default function Popup({message, color, setPopupState}){
 
@@ -17,6 +18,14 @@ export default function Popup({message, color, setPopupState}){
         visible: { opacity: 1}
     };
 
+    useEffect(() => {
+        disableScroll();
+
+        return () => {
+            enableScroll();
+        }
+    }, [])
+
     const colorToUse = color === 'red' ? "relative w-[70vw] h-[50vw] p-10 md:w-[25vw] md:h-[10vw] bg-red flex flex-col justify-center items-center text-center rounded-[2vw] drop-shadow-xl [text-shadow:_0px_5px_5px_rgb(0_0_0_/_30%)]"
     : 
     color === 'green' ? "relative w-[70vw] h-[50vw] p-10 md:w-[25vw] md:h-[10vw] bg-green flex flex-col justify-center items-center text-center rounded-[2vw] drop-shadow-xl [text-shadow:_0px_5px_5px_rgb(0_0_0_/_30%)]"
@@ -32,7 +41,7 @@ export default function Popup({message, color, setPopupState}){
     return (
 
         <motion.div
-         className="w-screen h-screen bg-transparent absolute top-0 left-0 z-50 flex items-center justify-center"
+         className="w-screen h-screen bg-transparent fixed bottom-0 left-0 z-50 flex items-center justify-center"
          variants={FadeInVariants}
          initial="hidden"
          animate="visible"

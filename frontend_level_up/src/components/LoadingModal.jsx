@@ -1,4 +1,6 @@
-import {motion} from 'framer-motion'
+import { motion } from 'framer-motion'
+import { disableScroll, enableScroll } from "../helperComponents/scrollLock";
+import { useEffect } from 'react';
 
 export default function LoadingModal(){
 
@@ -6,11 +8,19 @@ export default function LoadingModal(){
         hidden: { opacity: 0},
         visible: { opacity: 1}
     };
+
+    useEffect(() => {
+        disableScroll();
+
+        return () => {
+            enableScroll();
+        }
+    }, [])
     
     return (
 
         <motion.div 
-        className="w-screen h-screen bg-[#080808e1] absolute top-0 left-0 z-50 flex items-center justify-center"
+        className="w-screen h-screen bg-[#080808e1] fixed bottom-0 left-0 z-50 flex items-center justify-center"
         variants={FadeInVariants}
         initial="hidden"
         animate="visible"
