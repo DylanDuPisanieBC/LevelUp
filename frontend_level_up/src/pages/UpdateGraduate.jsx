@@ -17,6 +17,7 @@ const UpdateGraduate = () => {
     const[loading, setLoading] = useState(false);
     const[canClick, setCanClick] = useState(false);
     const[buttonEnabled, setButtonEnabled] = useState(true);
+    const[buttonClicked, setButtonClicked] = useState(false);
     const[popup, setPopup] = useState(false);
     const[popupMessage, setPopupMessage] = useState("Test")
     const[popupColor, setPopupColor] = useState("green")
@@ -213,7 +214,7 @@ const UpdateGraduate = () => {
     
     function checkPhoneNumberValidity() {
         if (graduate.phoneNumber === "") {
-            setValidation(prevState => ({ ...prevState, phoneNumber: { ...prevState.phoneNumber, message: "Please enter a phone number!", valid: false }}));
+            setValidation(prevState => ({ ...prevState, phoneNumber: { ...prevState.phoneNumber, message: "", valid: true }}));
         } else if (graduate.phoneNumber.charAt(0) !== "+") {
             setValidation(prevState => ({ ...prevState, phoneNumber: { ...prevState.phoneNumber, message: "Phone number is invalid! Format Example: +27824012002", valid: false }}));
         } else {
@@ -223,7 +224,7 @@ const UpdateGraduate = () => {
     
     function checkEmailValidity() {
         if (graduate.emailAddress === "") {
-            setValidation(prevState => ({ ...prevState, emailAddress: { ...prevState.emailAddress, message: "Please enter an email address!", valid: false }}));
+            setValidation(prevState => ({ ...prevState, emailAddress: { ...prevState.emailAddress, message: "", valid: true }}));
         } else if (!graduate.emailAddress.includes("@") || !graduate.emailAddress.includes(".")) {
             setValidation(prevState => ({ ...prevState, emailAddress: { ...prevState.emailAddress, message: "Email address is invalid! Format Example: name@email.com", valid: false }}));
         } else {
@@ -264,22 +265,27 @@ const UpdateGraduate = () => {
                     <div className="flex flex-col">
                         <label htmlFor="Name" className="text-orange text-md">Name</label>
                         <input id="Name" name="firstName" type="Text" value={graduate && graduate.firstName} onChange={handleValueChange} className="bg-black border-b border-white border-1 caret-white text-white text-2xl mt-2 focus:outline-none"></input>
+                        {buttonClicked ? dataValidation.firstName.message !== "" ?  <label htmlFor="Name" className="text-red text-md mt-3">{dataValidation.firstName.message}</label> : <></> : <></>}
                     </div>
                     <div className="flex flex-col col-start-2 col-end-2">
                         <label htmlFor="Surname" className="text-orange text-md">Surname</label>
                         <input id="Surname" name="lastName" type="Text" value={graduate && graduate.lastName} onChange={handleValueChange}  className="bg-black border-b border-white border-1 caret-white text-white text-2xl mt-2 focus:outline-none"></input>
+                        {buttonClicked ? dataValidation.lastName.message !== "" ?  <label htmlFor="Name" className="text-red text-md mt-3">{dataValidation.lastName.message}</label> : <></> : <></>}
                     </div>
                     <div className="flex flex-col">
                         <label htmlFor="PhoneNumber" className="text-orange text-md">Phone Number</label>
                         <input id="PhoneNumber" name="phoneNumber" type="tel" value={graduate && graduate.phoneNumber} onChange={handleValueChange}  className="bg-black border-b border-white border-1 caret-white text-white text-2xl mt-2 focus:outline-none"></input>
+                        {buttonClicked ? dataValidation.phoneNumber.message !== "" ?  <label htmlFor="Name" className="text-red text-md mt-3">{dataValidation.phoneNumber.message}</label> : <></> : <></>}
                     </div>
                     <div className="flex flex-col col-start-2 col-end-2">
                         <label htmlFor="EmailAddress" className="text-orange text-md">Email Address</label>
                         <input id="EmailAddress" name="emailAddress" type="email" value={graduate && graduate.emailAddress} onChange={handleValueChange}  className="bg-black border-b border-white border-1 caret-white text-white text-2xl mt-2 focus:outline-none"></input>
+                        {buttonClicked ? dataValidation.emailAddress.message !== "" ?  <label htmlFor="Name" className="text-red text-md mt-3">{dataValidation.emailAddress.message}</label> : <></> : <></>}
                     </div>
                     <div className="flex flex-col">
                         <label htmlFor="DateOfBirth" className="text-orange text-md">Date Of Birth</label>
                         <input id="DateOfBirth" name="dateOfBirth" type="date" value={graduate && graduate.dateOfBirth} onChange={handleValueChange}  className="bg-black border-b border-white border-1 caret-white text-white text-2xl mt-2 focus:outline-none"></input>
+                        {buttonClicked ? dataValidation.dateOfBirth.message !== "" ?  <label htmlFor="Name" className="text-red text-md mt-3">{dataValidation.dateOfBirth.message}</label> : <></> : <></>}
                     </div>
                     <div className="flex flex-col col-start-2 col-end-2 justify-center items-end">
                         <motion.button 
@@ -294,7 +300,7 @@ const UpdateGraduate = () => {
                                 transition: { type: "spring", stiffness: 400, damping: 10, delay: 0 },
                             }}
                             whileTap={{ scale: 0.95 }}
-                            onClick={(e)=>{ editGraduate(e);}}
+                            onClick={(e)=>{ editGraduate(e); setButtonClicked(true);}}
                             disabled={!buttonEnabled}>
                             Update Graduate
                             <img src="/assets/icons/rocket_white.webp" className=" w-[3vw] ml-3" />

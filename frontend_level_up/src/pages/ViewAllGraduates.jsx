@@ -34,6 +34,11 @@ const ViewAllGraduates = () => {
         visible: { x: 0, opacity: 1 }, 
     };
 
+    const fadeInLeftVariants = {
+        hidden: { opacity: 0 },
+        visible: { opacity: 1 }, 
+    };
+
     useEffect(() => {
         const fetchGraduatesData = async () => {
 
@@ -184,9 +189,33 @@ const ViewAllGraduates = () => {
                     </thead>
                     <tbody className="text-white">
                         {
+                            graduates.length > 0 
+                            ? 
                             graduates.map((grad, index) => {
                                 return <GradRow graduate={grad} key={grad.graduateId} index={index} showDeleteModal={toggleShowModal} setCurrentGrad={setCurrentGraduteFunc}/>
                             })
+                            :
+                            <tr className="h-[40vh] items-center justify-center">
+                                <td colSpan="3" className="text-center">
+                                    <motion.h1
+                                     className="text-white text-4xl"
+                                     variants={fadeInLeftVariants}
+                                     initial="hidden"
+                                     animate="visible"
+                                     transition={{delay: 1, duration: 2}}
+                                     >
+                                        No 2024 Graduates   
+                                        <motion.h1
+                                        variants={fadeInLeftVariants}
+                                        initial="hidden"
+                                        animate="visible"
+                                        transition={{delay: 3, duration: 4}}
+                                        >
+                                        yet...
+                                        </motion.h1>
+                                    </motion.h1>
+                                </td>
+                            </tr>
                         }
                     </tbody>
                 </table>
